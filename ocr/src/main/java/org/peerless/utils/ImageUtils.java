@@ -13,14 +13,14 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 /**
- * Í¼Æ¬¼ô²Ã
+ * å›¾ç‰‡å‰ªè£
  * 
  * @author yinfeng.feng
  */
 public class ImageUtils {
 
 	/**
-	 * Í¼Æ¬¼ô²Ã
+	 * å›¾ç‰‡å‰ªè£
 	 * 
 	 * @param left
 	 * @param top
@@ -42,8 +42,7 @@ public class ImageUtils {
 			reader.setInput(iis, true);
 
 			ImageReadParam param = reader.getDefaultReadParam();
-			Rectangle rect = new Rectangle(left, top, width, height);
-			param.setSourceRegion(rect);
+			param.setSourceRegion(new Rectangle(left, top, width, height));
 
 			BufferedImage bi = reader.read(0, param);
 

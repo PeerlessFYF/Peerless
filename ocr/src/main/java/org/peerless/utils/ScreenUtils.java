@@ -10,26 +10,52 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 /**
- * ½ØÆÁ
+ * æˆªå±
  * 
  * @author yinfeng.feng
  */
 public class ScreenUtils {
 
 	/**
-	 * ½ØÆÁ
+	 * æˆªå± å…¨æ¡Œé¢
 	 * 
 	 * @param filePath
 	 * @param fileName
-	 * @throws Exception
 	 */
 	public static void captureScreen(String filePath, String fileName) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle rect = new Rectangle(screenSize);
 
+		captureScreen(filePath, fileName, rect);
+	}
+
+	/**
+	 * æˆªå± æŒ‡å®šåŒºåŸŸ
+	 * 
+	 * @param filePath
+	 * @param fileName
+	 * @param left
+	 * @param top
+	 * @param width
+	 * @param height
+	 */
+	public static void captureScreen(String filePath, String fileName, int left, int top, int width, int height) {
+		Rectangle rect = new Rectangle(left, top, width, height);
+
+		captureScreen(filePath, fileName, rect);
+	}
+
+	/**
+	 * æˆªå±
+	 * 
+	 * @param filePath
+	 * @param fileName
+	 * @param rect
+	 */
+	private static void captureScreen(String filePath, String fileName, Rectangle rect) {
 		try {
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			Rectangle screenRectangle = new Rectangle(screenSize);
 			Robot robot = new Robot();
-			BufferedImage image = robot.createScreenCapture(screenRectangle);
+			BufferedImage image = robot.createScreenCapture(rect);
 
 			File screenFile = new File(filePath);
 			if (!screenFile.getParentFile().exists()) {

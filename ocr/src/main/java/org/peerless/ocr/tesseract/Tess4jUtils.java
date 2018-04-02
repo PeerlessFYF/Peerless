@@ -8,71 +8,46 @@ import net.sourceforge.tess4j.TesseractException;
 import net.sourceforge.tess4j.util.LoadLibs;
 
 /**
- * tesseract for java£¬ ocr£¨Optical Character Recognition£¬¹âÑ§×Ö·ûÊ¶±ğ£© 
+ * tesseract for javaï¼Œ ocrï¼ˆOptical Character Recognitionï¼Œå…‰å­¦å­—ç¬¦è¯†åˆ«ï¼‰
  * 
  * @author yinfeng.feng
  */
 public class Tess4jUtils {
 
-	private static final String ENG = "eng";
+	public static final String ENG = "eng";
 
-	private static final String CHI_SIM = "chi_sim";
+	public static final String CHI_SIM = "chi_sim";
 
 	/**
-	 * ´ÓÍ¼Æ¬ÖĞÌáÈ¡ÎÄ×Ö,Ä¬ÈÏÉèÖÃÓ¢ÎÄ×Ö¿â,Ê¹ÓÃclasspathÄ¿Â¼ÏÂµÄÑµÁ·¿â
+	 * ä»å›¾ç‰‡ä¸­æå–æ–‡å­—ï¼Œé»˜è®¤ä½¿ç”¨è‹±æ–‡å­—åº“
 	 * 
-	 * @param path
+	 * @param path - å›¾ç‰‡è·¯å¾„
 	 * @return
 	 */
 	public static String readChar(String path) {
-		// JNA Interface Mapping
-		ITesseract instance = new Tesseract();
-
-		// ITesseract instance = new Tesseract1();
-		File imageFile = new File(path);
-		// In case you don't have your own tessdata, let it also be extracted for you
-		// ÕâÑù¾ÍÄÜÊ¹ÓÃclasspathÄ¿Â¼ÏÂµÄÑµÁ·¿âÁË
-		File tessDataFolder = LoadLibs.extractTessResources("tessdata");
-		// Set the tessdata path
-		instance.setDatapath(tessDataFolder.getAbsolutePath());
-		// Ó¢ÎÄ¿âÊ¶±ğÊı×Ö±È½Ï×¼È·
-		instance.setLanguage(ENG);
-
-		return getOCRText(instance, imageFile);
+		return readChar(path, ENG);
 	}
 
 	/**
-	 * ´ÓÍ¼Æ¬ÖĞÌáÈ¡ÎÄ×Ö
+	 * ä»å›¾ç‰‡ä¸­æå–æ–‡å­—
 	 * 
-	 * @param path
-	 *            Í¼Æ¬Â·¾¶
-	 * @param dataPath
-	 *            ÑµÁ·¿âÂ·¾¶
-	 * @param language
-	 *            ÓïÑÔ×Ö¿â
+	 * @param path - å›¾ç‰‡è·¯å¾„
+	 * @param language - è¯­è¨€å­—åº“
 	 * @return
 	 */
-	public static String readChar(String path, String dataPath, String language) {
-		ITesseract instance = new Tesseract();
-
-		File imageFile = new File(path);
-		instance.setDatapath(dataPath);
-		// Ó¢ÎÄ¿âÊ¶±ğÊı×Ö±È½Ï×¼È·
-		instance.setLanguage(language);
-
-		return getOCRText(instance, imageFile);
-	}
-
-	/**
-	 * Ê¶±ğÍ¼Æ¬ÎÄ¼şÖĞµÄÎÄ×Ö
-	 * 
-	 * @param instance
-	 * @param imageFile
-	 * @return
-	 */
-	private static String getOCRText(ITesseract instance, File imageFile) {
+	public static String readChar(String path, String language) {
 		String result = null;
 		try {
+			ITesseract instance = new Tesseract();
+
+			File imageFile = new File(path);
+			// ä½¿ç”¨classpathç›®å½•ä¸‹çš„è®­ç»ƒåº“
+			File tessDataFolder = LoadLibs.extractTessResources("tessdata");
+			// Set the tessdata path
+			instance.setDatapath(tessDataFolder.getAbsolutePath());
+			// è‹±æ–‡åº“è¯†åˆ«æ•°å­—æ¯”è¾ƒå‡†ç¡®
+			instance.setLanguage(ENG);
+
 			result = instance.doOCR(imageFile);
 		} catch (TesseractException e) {
 			e.printStackTrace();
