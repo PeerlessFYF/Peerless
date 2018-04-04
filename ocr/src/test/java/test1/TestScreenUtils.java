@@ -8,7 +8,7 @@ import org.peerless.utils.ScreenUtils;
 /**
  * test ScreenUtils
  * 
- * @author yinfeng.feng
+ * @author yinfeng.fyf
  */
 public class TestScreenUtils {
 

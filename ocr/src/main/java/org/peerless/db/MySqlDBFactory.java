@@ -17,8 +17,8 @@ public class MySqlDBFactory {
     static {
         try {
             dataSource = new DruidDataSource();
-            dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-            dataSource.setUrl("jdbc:mysql://");
+            dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/peerless?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
             dataSource.setUsername("root");
             dataSource.setPassword("123456");
             dataSource.setInitialSize(5);

@@ -15,7 +15,7 @@ import javax.imageio.stream.ImageInputStream;
 /**
  * 图片剪裁
  * 
- * @author yinfeng.feng
+ * @author yinfeng.fyf
  */
 public class ImageUtils {
 

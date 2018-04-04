@@ -10,7 +10,7 @@ import net.sourceforge.tess4j.util.LoadLibs;
 /**
  * tesseract for java， ocr（Optical Character Recognition，光学字符识别）
  * 
- * @author yinfeng.feng
+ * @author yinfeng.fyf
  */
 public class Tess4jUtils {
 

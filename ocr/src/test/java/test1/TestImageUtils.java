@@ -5,7 +5,7 @@ import org.peerless.utils.ImageUtils;
 /**
  * Test ImageUtils 
  * 
- * @author yinfeng.feng
+ * @author yinfeng.fyf
  */
 public class TestImageUtils {
 

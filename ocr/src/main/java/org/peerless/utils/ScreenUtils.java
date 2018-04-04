@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 /**
  * 截屏
  * 
- * @author yinfeng.feng
+ * @author yinfeng.fyf
  */
 public class ScreenUtils {
 
