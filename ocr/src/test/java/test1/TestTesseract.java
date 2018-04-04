@@ -7,9 +7,16 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.peerless.ocr.tesseract.Tess4jUtils;
 import org.peerless.utils.ScreenUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * Test Tesseract
@@ -50,6 +57,8 @@ public class TestTesseract {
 
 	public static void readText(String str) {
 		try {
+			Map<Integer, Integer> percentMap = Maps.newHashMap();
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					new ByteArrayInputStream(str.getBytes(Charset.forName("utf8"))), Charset.forName("utf8")));
 			String line;
@@ -59,11 +68,27 @@ public class TestTesseract {
 					if (count % 2 == 0) {
 						System.out.println("========>" + line);
 					} else {
-						System.out.println("====%====>" + line);
+						System.out.println("====%====>" + line + "<====");
+						String[] pArr = line.split("%");
+						for (String p : pArr) {
+							p = p.trim();
+							p = (StringUtils.equals("55", p)) ? "85" : p;
+							p = (StringUtils.equals("50", p)) ? "80" : p;
+							int key = Integer.parseInt(p);
+							Integer percentCount = percentMap.get(key);
+							if (percentCount == null) {
+								percentMap.put(key, 1);
+							} else {
+								percentMap.put(key, ++percentCount);
+							}
+							
+						}
 					}
 					count++;
 				}
 			}
+			
+			System.out.println(JSON.toJSONString(percentMap));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
