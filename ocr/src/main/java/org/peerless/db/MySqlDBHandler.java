@@ -1,4 +1,4 @@
-package org.peerless.ocr.tesseract;
+package org.peerless.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
