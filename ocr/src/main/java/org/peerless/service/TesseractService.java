@@ -52,6 +52,7 @@ public class TesseractService {
 
 		// 3、解析文本
 		Map<Integer, Integer> percentMap = readText(result);
+		System.out.println(yyyyMMddHHmm + ": " + JSON.toJSONString(percentMap));
 
 		// 4、保存入库
 		MySqlDBHandler m = new MySqlDBHandler();
@@ -92,7 +93,13 @@ public class TesseractService {
 							p = p.trim();
 							p = (StringUtils.equals("55", p)) ? "85" : p;
 							p = (StringUtils.equals("50", p)) ? "80" : p;
-							int key = Integer.parseInt(p);
+							int key = 0;
+							try {
+								key = Integer.parseInt(p);
+							} catch (Exception e) {
+								System.out.println("error: " + e.getMessage());
+								continue;
+							}
 							Integer percentCount = percentMap.get(key);
 							if (percentCount == null) {
 								percentMap.put(key, 1);
@@ -106,7 +113,6 @@ public class TesseractService {
 				}
 			}
 
-			System.out.println(JSON.toJSONString(percentMap));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
